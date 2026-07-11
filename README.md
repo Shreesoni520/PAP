@@ -1,69 +1,74 @@
 # Reporta Évora
 
-Plataforma web para registo e gestão de ocorrências urbanas na cidade de Évora. O projeto inclui um **site público** para cidadãos e um **painel de administração** para funcionários e administradores.
+> **Urban occurrence reporting platform for Évora, Portugal.**  
+> Citizens report public-space and road issues, browse news and maps, and manage their account. Staff use the admin dashboard to handle occurrences, green spaces, users, and newsletters.
 
 ---
 
-## Índice
+## Table of Contents
 
-- [Sobre o projeto](#sobre-o-projeto)
-- [Parte pública](#parte-pública)
-- [Parte de administração](#parte-de-administração)
-- [Tecnologias](#tecnologias)
-- [Requisitos](#requisitos)
-- [Instalação](#instalação)
-- [Configuração de segredos](#configuração-de-segredos)
-- [Base de dados](#base-de-dados)
-- [URLs principais](#urls-principais)
-- [Estrutura do projeto](#estrutura-do-projeto)
-- [Dependências PHP](#dependências-php)
-- [Mover para outro PC](#mover-para-outro-pc)
+- [About the Project](#about-the-project)
+- [Public Website](#public-website)
+- [Admin Panel](#admin-panel)
+- [Technologies](#technologies)
+- [Requirements](#requirements)
+- [Installation](#installation)
+- [Secrets Configuration](#secrets-configuration)
+- [Database](#database)
+- [Main URLs](#main-urls)
+- [Project Structure](#project-structure)
+- [PHP Dependencies](#php-dependencies)
+- [Moving to Another PC](#moving-to-another-pc)
 - [GitHub](#github)
 
 ---
 
-## Sobre o projeto
+## About the Project
 
-O **Reporta Évora** permite que os cidadãos consultem informação útil, reportem ocorrências no espaço urbano, leiam notícias e interajam com a plataforma através de uma conta pessoal.
+**Reporta Évora** is a full-stack web application developed as a school project (PAP). It connects citizens with municipal services by allowing them to:
 
-Do lado da administração, a equipa pode gerir árvores, estados de intervenção, ocorrências, notícias, utilizadores, mensagens de contacto e newsletter.
+- Report problems in public spaces and roads
+- View occurrences on an interactive map
+- Read news and leave comments
+- Contact the organization and subscribe to newsletters
+- Create a personal account with profile and security settings
+
+On the administration side, the team can manage trees, intervention statuses, occurrences, news, users, contact messages, newsletters, PDF exports, and real-time notifications.
 
 ---
 
-## Parte pública
+## Public Website
 
-Site acessível em `http://localhost/PAP/`
+Accessible at `http://localhost/PAP/`
 
-### Funcionalidades
+### Features
 
-| Área | Descrição |
-|------|-----------|
-| **Início** | Página principal com destaques e acesso rápido às secções |
-| **Informação útil** | Informação para o cidadão sobre o sistema e serviços |
-| **Mapa 2D** | Visualização geográfica de ocorrências e espaços verdes |
-| **Ocorrências urbanas** | Reporte de problemas no espaço público com localização e foto |
-| **Ocorrências de estrada** | Reporte de problemas rodoviários com localização e foto |
-| **Listagens públicas** | Consulta de ocorrências urbanas e de estrada |
-| **Notícias** | Leitura de notícias; comentários exigem login e usam o nome da conta |
-| **Contacto** | Formulário de mensagens; utilizadores autenticados usam nome/email da conta |
-| **Newsletter** | Subscrição com confirmação por email (requer login) |
-| **Conta pública** | Registo, login, perfil, segurança e recuperação de palavra-passe |
-| **Área pessoal** | As minhas ocorrências e as minhas mensagens |
+| Area | Description |
+|------|-------------|
+| **Home** | Main landing page with highlights and quick access |
+| **Useful Information** | Information for citizens about the system and services |
+| **2D Map** | Geographic view of occurrences and green spaces |
+| **Urban Occurrences** | Report public space issues with location and photo |
+| **Road Occurrences** | Report road issues with location and photo |
+| **Public Listings** | Browse urban and road occurrences |
+| **News** | Read news articles; comments require login and use the account name |
+| **Contact** | Message form; logged-in users use their account name and email |
+| **Newsletter** | Email subscription with confirmation (login required) |
+| **Public Account** | Sign up, login, profile, security, and password recovery |
+| **Personal Area** | My occurrences and my contact messages |
 
-### Conta pública
+### What citizens can do
 
-Os cidadãos podem:
+- Create an account and log in
+- Manage profile (name, email, phone, photo, etc.)
+- Enable two-factor authentication (2FA) via email
+- Recover password
+- View their own occurrences and contact messages
+- Comment on news using only their registered account name
 
-- Criar conta e iniciar sessão
-- Gerir perfil (nome, email, telefone, foto, etc.)
-- Ativar autenticação em dois fatores (2FA) por email
-- Recuperar palavra-passe
-- Ver as suas ocorrências e mensagens de contacto
-- Comentar notícias apenas com o nome associado à conta
+### Public routes
 
-### Rotas públicas
-
-O site público usa o parâmetro `evora_p` em `index.php`:
+The public site uses the `evora_p` parameter in `index.php`:
 
 ```
 index.php?evora_p=inicio
@@ -80,48 +85,48 @@ index.php?evora_p=information
 
 ---
 
-## Parte de administração
+## Admin Panel
 
-Painel acessível em `http://localhost/PAP/Admin/`
+Accessible at `http://localhost/PAP/Admin/`
 
-### Tipos de utilizador
+### User roles
 
-| Tipo | Acesso |
+| Role | Access |
 |------|--------|
-| **Funcionário** | Dashboard, mapas, ocorrências, intervenções, perfil e segurança |
-| **Administrador** | Tudo o que o funcionário tem + gestão de árvores, estados, notícias, utilizadores, contactos e newsletter |
+| **Staff (Funcionário)** | Dashboard, maps, occurrences, interventions, profile, and security |
+| **Administrator** | Everything staff has + trees, statuses, news, users, contacts, and newsletter |
 
-### Funcionalidades
+### Modules
 
-| Módulo | Descrição |
-|--------|-----------|
-| **Dashboard** | Estatísticas e gráficos da atividade da plataforma |
-| **Mapa 2D unificado** | Visualização administrativa de ocorrências e árvores |
-| **Árvores** | Adicionar, listar, editar e remover árvores |
-| **Estados** | Gestão dos estados de intervenção |
-| **Ocorrências urbanas** | Criar, listar, editar intervenções e remover registos |
-| **Ocorrências de estrada** | Criar, listar, editar intervenções e remover registos |
-| **Intervenções** | Atribuição e acompanhamento de tarefas por funcionário |
-| **Notícias** | Criar, editar, listar e remover notícias |
-| **Comentários** | Moderação de comentários nas notícias |
-| **Contacto** | Gestão das mensagens enviadas pelo formulário público |
-| **Newsletter** | Envio de newsletters aos subscritores |
-| **Utilizadores internos** | Gestão de contas de funcionários e administradores |
-| **Utilizadores públicos** | Gestão de contas de cidadãos |
-| **Perfil e segurança** | Alteração de dados, password e 2FA |
-| **Exportação PDF** | Exportação de dados selecionados |
-| **Notificações** | Alertas de novas ocorrências e atividade |
+| Module | Description |
+|--------|-------------|
+| **Dashboard** | Statistics and charts of platform activity |
+| **Unified 2D Map** | Admin view of occurrences and trees |
+| **Trees** | Add, list, edit, and remove trees |
+| **Statuses** | Manage intervention statuses |
+| **Urban Occurrences** | Create, list, edit interventions, and remove records |
+| **Road Occurrences** | Create, list, edit interventions, and remove records |
+| **Interventions** | Assign and track tasks per staff member |
+| **News** | Create, edit, list, and remove news articles |
+| **Comments** | Moderate comments on news articles |
+| **Contact** | Manage messages from the public contact form |
+| **Newsletter** | Send newsletters to subscribers |
+| **Internal Users** | Manage staff and administrator accounts |
+| **Public Users** | Manage citizen accounts |
+| **Profile & Security** | Update data, password, and 2FA |
+| **PDF Export** | Export selected data to PDF |
+| **Notifications** | Alerts for new occurrences and activity |
 
-### Alertas automáticos
+### Automatic alerts
 
-Quando uma ocorrência é registada, o sistema pode:
+When an occurrence is submitted, the system can:
 
-- Enviar **email** ao administrador
-- Enviar **SMS** via Twilio (se configurado)
+- Send an **email** to the administrator
+- Send an **SMS** via Twilio (if configured)
 
-### Rotas de administração
+### Admin routes
 
-O painel usa o parâmetro `evora` em `Admin/index.php`:
+The panel uses the `evora` parameter in `Admin/index.php`:
 
 ```
 Admin/index.php?evora=inicio
@@ -137,84 +142,84 @@ Admin/index.php?evora=security
 
 ---
 
-## Tecnologias
+## Technologies
 
-| Camada | Tecnologia |
-|--------|------------|
+| Layer | Technology |
+|-------|------------|
 | Backend | PHP 8.0+ |
-| Base de dados | MySQL / MariaDB |
-| Servidor local | XAMPP (Apache + MySQL) |
-| Frontend público | HTML, CSS, Bootstrap, JavaScript |
-| Painel admin | Mazer Admin Template, Bootstrap, ApexCharts |
+| Database | MySQL / MariaDB |
+| Local server | XAMPP (Apache + MySQL) |
+| Public frontend | HTML, CSS, Bootstrap, JavaScript |
+| Admin panel | Mazer Admin Template, Bootstrap, ApexCharts |
 | Email | PHP `mail()` |
 | SMS | Twilio SDK |
 | PDF | Dompdf |
-| Gestão de dependências | Composer |
+| Dependency management | Composer |
 
 ---
 
-## Requisitos
+## Requirements
 
-- **XAMPP** com PHP **8.0 ou superior**
+- **XAMPP** with PHP **8.0 or higher**
 - **MySQL / MariaDB**
-- **Composer** (apenas se precisar de reinstalar a pasta `vendor`)
+- **Composer** (only if you need to reinstall the `vendor` folder)
 
 ---
 
-## Instalação
+## Installation
 
-### 1. Copiar o projeto
+### 1. Copy the project
 
-Coloque a pasta do projeto em:
+Place the project folder at:
 
 ```
 C:\xampp\htdocs\PAP
 ```
 
-### 2. Configurar segredos
+### 2. Configure secrets
 
-Veja a secção [Configuração de segredos](#configuração-de-segredos).
+See [Secrets Configuration](#secrets-configuration).
 
-### 3. Importar a base de dados
+### 3. Import the database
 
-1. Abra o **phpMyAdmin**
-2. Crie ou importe a base de dados **`pap`**
-3. Importe o ficheiro SQL do projeto (se disponível)
+1. Open **phpMyAdmin**
+2. Create or import the **`pap`** database
+3. Import the project SQL file (if available)
 
-### 4. Instalar dependências PHP
+### 4. Install PHP dependencies
 
-Se a pasta `vendor` não existir:
+If the `vendor` folder does not exist:
 
 ```bash
 cd C:\xampp\htdocs\PAP
 php composer.phar install
 ```
 
-### 5. Iniciar o servidor
+### 5. Start the server
 
-1. Abra o **XAMPP Control Panel**
-2. Inicie **Apache** e **MySQL**
-3. Aceda a:
-   - Público: `http://localhost/PAP/`
+1. Open **XAMPP Control Panel**
+2. Start **Apache** and **MySQL**
+3. Visit:
+   - Public: `http://localhost/PAP/`
    - Admin: `http://localhost/PAP/Admin/`
 
 ---
 
-## Configuração de segredos
+## Secrets Configuration
 
-**Nunca coloque passwords, tokens Twilio ou credenciais dentro do código do projeto.**
+**Never put passwords, Twilio tokens, or credentials inside the project code.**
 
-### Ficheiro real (fora do projeto)
+### Real secrets file (outside the project)
 
 ```
 C:\xampp\secrets\pap-secrets.php
 ```
 
-### Como criar
+### How to create it
 
-1. Crie a pasta `C:\xampp\secrets\`
-2. Copie `pap-secrets.example.php` para `C:\xampp\secrets\pap-secrets.php`
-3. Edite com os seus valores reais:
+1. Create the folder `C:\xampp\secrets\`
+2. Copy `pap-secrets.example.php` to `C:\xampp\secrets\pap-secrets.php`
+3. Fill in your real values:
 
 ```php
 return [
@@ -222,17 +227,17 @@ return [
     'DB_USER' => 'root',
     'DB_PASS' => '',
     'DB_NAME' => 'pap',
-    'ADMIN_EMAIL' => 'seu-email@exemplo.com',
-    'TWILIO_SID'   => 'SEU_TWILIO_SID',
-    'TWILIO_TOKEN' => 'SEU_TWILIO_TOKEN',
+    'ADMIN_EMAIL' => 'your-email@example.com',
+    'TWILIO_SID'   => 'YOUR_TWILIO_SID',
+    'TWILIO_TOKEN' => 'YOUR_TWILIO_TOKEN',
     'TWILIO_FROM'  => '+1XXXXXXXXXX',
     'TWILIO_TO'    => '+351XXXXXXXXX',
 ];
 ```
 
-### Alterar credenciais
+### Changing credentials
 
-Para mudar Twilio, email, base de dados, etc., edite **apenas**:
+To update Twilio, email, database, etc., edit **only**:
 
 ```
 C:\xampp\secrets\pap-secrets.php
@@ -240,83 +245,83 @@ C:\xampp\secrets\pap-secrets.php
 
 ---
 
-## Base de dados
+## Database
 
-Nome da base de dados: **`pap`**
+Database name: **`pap`**
 
-### Tabelas principais
+### Main tables
 
-| Tabela | Uso |
-|--------|-----|
-| `users` | Utilizadores do painel admin |
-| `users_public` | Utilizadores do site público |
-| `ocorrencias` | Ocorrências urbanas |
-| `ocorrencias_estrada` | Ocorrências de estrada |
-| `arvores` | Árvores / espaços verdes |
-| `states` | Estados de intervenção |
-| `intervencoes` | Intervenções atribuídas |
-| `noticias` | Notícias |
-| `comentarios_noticias` | Comentários nas notícias |
-| `contact` | Mensagens de contacto |
-| `contact_info` | Informações de contacto do site |
-| `newsletter_subscribers` | Subscritores da newsletter |
-| `notificacoes` | Notificações do admin |
-| `atividade` | Registo de atividade dos utilizadores admin |
-| `log` | Logs do sistema |
+| Table | Purpose |
+|-------|---------|
+| `users` | Admin panel users |
+| `users_public` | Public website users |
+| `ocorrencias` | Urban occurrences |
+| `ocorrencias_estrada` | Road occurrences |
+| `arvores` | Trees / green spaces |
+| `states` | Intervention statuses |
+| `intervencoes` | Assigned interventions |
+| `noticias` | News articles |
+| `comentarios_noticias` | News comments |
+| `contact` | Contact messages |
+| `contact_info` | Site contact information |
+| `newsletter_subscribers` | Newsletter subscribers |
+| `notificacoes` | Admin notifications |
+| `atividade` | Admin user activity log |
+| `log` | System logs |
 
 ---
 
-## URLs principais
+## Main URLs
 
-| Página | URL |
-|--------|-----|
-| Site público | `http://localhost/PAP/` |
-| Login público | `http://localhost/PAP/index.php?evora_p=login` |
-| Notícias | `http://localhost/PAP/index.php?evora_p=noticias` |
-| Mapa público | `http://localhost/PAP/index.php?evora_p=mapa` |
-| Contacto | `http://localhost/PAP/index.php?evora_p=contact` |
+| Page | URL |
+|------|-----|
+| Public site | `http://localhost/PAP/` |
+| Public login | `http://localhost/PAP/index.php?evora_p=login` |
+| News | `http://localhost/PAP/index.php?evora_p=noticias` |
+| Public map | `http://localhost/PAP/index.php?evora_p=mapa` |
+| Contact | `http://localhost/PAP/index.php?evora_p=contact` |
 | Admin | `http://localhost/PAP/Admin/` |
-| Login admin | `http://localhost/PAP/Admin/login.php` |
+| Admin login | `http://localhost/PAP/Admin/login.php` |
 
 ---
 
-## Estrutura do projeto
+## Project Structure
 
 ```
 PAP/
-├── index.php              # Router do site público
-├── config.php             # Ligação à BD e leitura de segredos
-├── inicio.php             # Página inicial pública
-├── login.php              # Login público
-├── signup.php             # Registo público
-├── profile.php            # Perfil do cidadão
-├── noticias.php           # Notícias e comentários
-├── contact.php            # Formulário de contacto
-├── ocorrencias.php        # Reportar ocorrência urbana
+├── index.php              # Public site router
+├── config.php             # DB connection and secrets loader
+├── inicio.php             # Public home page
+├── login.php              # Public login
+├── signup.php             # Public registration
+├── profile.php            # Citizen profile
+├── noticias.php           # News and comments
+├── contact.php            # Contact form
+├── ocorrencias.php        # Report urban occurrence
 ├── ocorrencias_estrada.php
-├── map2d.php              # Mapa público
-├── forms/                 # Newsletter e confirmações
-├── assets/                # CSS, JS e imagens do site público
-├── uploads/               # Fotos e ficheiros enviados (não vai para GitHub)
-├── vendor/                # Dependências Composer (Twilio, Dompdf)
+├── map2d.php              # Public map
+├── forms/                 # Newsletter handlers
+├── assets/                # Public CSS, JS, and images
+├── uploads/               # User uploads (not on GitHub)
+├── vendor/                # Composer dependencies (Twilio, Dompdf)
 ├── pap-secrets.example.php
 ├── composer.json
 ├── README.md
 └── Admin/
-    ├── index.php          # Router do painel admin
-    ├── config.php         # Usa o config.php da raiz
-    ├── login.php          # Login admin
+    ├── index.php          # Admin panel router
+    ├── config.php         # Loads root config.php
+    ├── login.php          # Admin login
     ├── inicio.php         # Dashboard
-    ├── menu.php           # Menu lateral e notificações
-    ├── add_*.php          # Páginas de criação
-    ├── listar_*.php       # Páginas de listagem
-    ├── editar_*.php       # Páginas de edição
-    ├── remove_*.php       # Páginas de remoção
-    ├── export_pdf.php     # Exportação PDF
-    └── assets/            # CSS, JS e recursos do admin
+    ├── menu.php           # Sidebar and notifications
+    ├── add_*.php          # Create pages
+    ├── listar_*.php       # List pages
+    ├── editar_*.php       # Edit pages
+    ├── remove_*.php       # Delete pages
+    ├── export_pdf.php     # PDF export
+    └── assets/            # Admin CSS, JS, and resources
 ```
 
-### Ficheiro de segredos (fora do projeto)
+### Secrets file (outside project)
 
 ```
 C:\xampp\secrets\pap-secrets.php
@@ -324,14 +329,14 @@ C:\xampp\secrets\pap-secrets.php
 
 ---
 
-## Dependências PHP
+## PHP Dependencies
 
-| Pacote | Função |
-|--------|--------|
-| `twilio/sdk` | Envio de SMS quando ocorrências são registadas |
-| `dompdf/dompdf` | Geração de PDFs no painel admin |
+| Package | Purpose |
+|---------|---------|
+| `twilio/sdk` | SMS alerts when occurrences are reported |
+| `dompdf/dompdf` | PDF generation in the admin panel |
 
-Instalação:
+Install:
 
 ```bash
 php composer.phar install
@@ -339,64 +344,64 @@ php composer.phar install
 
 ---
 
-## Mover para outro PC
+## Moving to Another PC
 
-Copie estes 3 elementos:
+Copy these 3 items:
 
-1. **Pasta do projeto**
+1. **Project folder**
    ```
    C:\xampp\htdocs\PAP
    ```
 
-2. **Ficheiro de segredos**
+2. **Secrets file**
    ```
    C:\xampp\secrets\pap-secrets.php
    ```
 
-3. **Base de dados** `pap` (exportar no phpMyAdmin e importar no novo PC)
+3. **Database** `pap` (export from phpMyAdmin and import on the new PC)
 
-No novo PC:
+On the new PC:
 
-- Instale XAMPP com PHP 8.0+
-- Se `vendor` não existir, execute `php composer.phar install`
-- Inicie Apache e MySQL
+- Install XAMPP with PHP 8.0+
+- If `vendor` is missing, run `php composer.phar install`
+- Start Apache and MySQL
 
 ---
 
 ## GitHub
 
-### O que vai para o GitHub
+### What goes on GitHub
 
-- Código do projeto
-- `pap-secrets.example.php` (template sem segredos reais)
+- Project source code
+- `pap-secrets.example.php` (template without real secrets)
 - `README.md`
 
-### O que NÃO deve ir para o GitHub
+### What should NOT go on GitHub
 
-- `C:\xampp\secrets\pap-secrets.php` (segredos reais)
-- Pasta `uploads/` (fotos dos utilizadores)
-- Pasta `vendor/` (reinstalar com Composer)
+- `C:\xampp\secrets\pap-secrets.php` (real secrets)
+- `uploads/` folder (user photos)
+- `vendor/` folder (reinstall with Composer)
 
-### Depois de clonar o repositório
+### After cloning the repository
 
 ```bash
 cd PAP
 php composer.phar install
 ```
 
-Crie também `C:\xampp\secrets\pap-secrets.php` com os seus dados reais.
+Also create `C:\xampp\secrets\pap-secrets.php` with your real values.
 
 ---
 
-## Notas de segurança
+## Security Notes
 
-- Comentários em notícias exigem login e usam o nome da conta
-- Formulário de contacto usa nome/email da conta quando o utilizador está autenticado
-- Segredos (Twilio, BD, email) ficam fora da pasta do projeto
-- Logout limpa corretamente os dados de sessão
+- News comments require login and use the account name
+- Contact form uses account name/email when the user is logged in
+- Secrets (Twilio, DB, email) are stored outside the project folder
+- Logout clears all session data correctly
 
 ---
 
-## Autor
+## Author
 
-Projeto desenvolvido no âmbito da PAP — **Reporta Évora**.
+Developed as a school project (PAP) — **Reporta Évora**.
