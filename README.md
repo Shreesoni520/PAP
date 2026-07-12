@@ -1,10 +1,35 @@
 # Reporta Évora
 
-> **Urban occurrence reporting platform for Évora, Portugal.**  
-> Citizens report public-space and road issues, browse news and maps, and manage their account. Staff use the admin dashboard to handle occurrences, green spaces, users, and newsletters.
+Urban occurrence reporting platform for Évora, Portugal. A full-stack web application that lets citizens report public-space and road issues, while municipal staff manage and resolve them through an admin dashboard.
+
+## What is it for?
+
+Évora residents often encounter problems in public spaces and roads — broken pavements, damaged greenery, road hazards — with no simple way to report them to the city. Reporta Évora solves this by giving citizens a direct channel to report issues with photos and location, and giving municipal staff the tools to track, assign, and resolve those reports.
+
+## What does it do?
+
+- Lets citizens report urban and road occurrences with photos and map location
+- Shows all occurrences and green spaces on an interactive 2D map
+- Provides a personal account area for profile, security, and viewing past reports
+- Publishes news articles with comments from logged-in users
+- Offers a contact form and newsletter subscription
+- Gives staff an admin dashboard to manage occurrences, trees, interventions, news, users, and newsletters
+- Sends email and SMS alerts when new occurrences are submitted
+- Exports data to PDF and shows real-time notifications in the admin panel
+
+## How does it work?
+
+1. A citizen visits the public website, creates an account, and submits an occurrence (urban or road) with a description, photo, and location.
+2. The report is saved to the MySQL database and the administrator is notified by email (and SMS via Twilio, if configured).
+3. Staff log into the admin panel, review the occurrence on the dashboard or map, and assign an intervention with a status.
+4. Administrators can also manage trees, publish news, moderate comments, respond to contact messages, and send newsletters.
+5. Citizens can track their own reports in their personal area and stay informed through news and the newsletter.
+
+## Author
+
+Krishna Soni
 
 ---
-
 ## Table of Contents
 
 - [About the Project](#about-the-project)
@@ -404,4 +429,4 @@ Also create `C:\xampp\secrets\pap-secrets.php` with your real values.
 
 ## Author
 
-Developed as a school project (PAP) — **Reporta Évora**.
+Krishna Soni — developed as a school project (PAP).
